@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica Dipendente</title>
+</head>
+<body>
+    <h1>Modifica Dipendente</h1>
+    <div th:each= "dipendente: ${dipendenti}">
+  <form action="/modifica-dipendente" method="post">
+    <input type="hidden" name="cognome" th:value="${dipendente.getCognome()}" />
+    <!-- Aggiungi un campo per il nuovo stipendio -->
+    <label for="stipendio" th:text="'Nuovo stipendio per ' + ${dipendente.getCognome()} + ':'"></label>
+    <input type="text" id="stipendio" name="stipendio" />
+    <input type="submit" value="Salva" />
+</form>
+  </div>
+</body>
+</html>
