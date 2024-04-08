@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,5 +29,15 @@ public class MyController {
             @RequestParam("stipendio") double stipendio) {
         dipendenteJDBCTemp.insertDipendente(cognome, mansione, stipendio);
         return "redirect:/";
+    }
+    
+    @PostMapping("/cancella-dipendente")
+    public String cancellaDipedente(@RequestParam("cognome") String cognome, Model model) {
+    	
+    	dipendenteJDBCTemp.deleteDipendente(cognome);
+    	
+    	model.addAttribute("cognome", cognome);
+    	
+    	 return "delete";
     }
 }

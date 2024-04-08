@@ -1,5 +1,7 @@
 package com.example.demo;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -20,25 +22,31 @@ public class DipendenteJDBCTemp {
         return jdbcTemplateObject.update(query, cognome, mansione, stipendio);
     }
 
-    public int updateCognome(int id, String cognome) {
-        String query = "UPDATE Dipendente SET cognome = ? WHERE id = ?";
-        return jdbcTemplateObject.update(query, cognome, id);
+    public int updateCognome(String cognomeNuovo, String cognome) {
+        String query = "UPDATE Dipendente SET cognome = ? WHERE cognome = ?";
+        return jdbcTemplateObject.update(query, cognome);
     }
 
-    public int updateMansione(int id, String mansione) {
-        String query = "UPDATE Dipendente SET mansione = ? WHERE id = ?";
-        return jdbcTemplateObject.update(query, mansione, id);
+    public int updateMansione(String mansione, String cognome) {
+        String query = "UPDATE Dipendente SET mansione = ? WHERE cognome = ?";
+        return jdbcTemplateObject.update(query, mansione);
     }
 
-    public int updateStipendio(int id, double stipendio) {
-        String query = "UPDATE Dipendente SET stipendio = ? WHERE id = ?";
-        return jdbcTemplateObject.update(query, stipendio, id);
+    public int updateStipendio(double stipendio, String cognome) {
+        String query = "UPDATE Dipendente SET stipendio = ? WHERE cognome = ?";
+        return jdbcTemplateObject.update(query, stipendio, cognome);
     }
 
     public int deleteDipendente(int id) {
         String query = "DELETE FROM Dipendente WHERE id = ?";
         return jdbcTemplateObject.update(query, id);
     }
+    public int deleteDipendente(String  cognome) {
+        String query = "DELETE FROM Dipendente WHERE cognome = ?";
+        return jdbcTemplateObject.update(query, cognome);
+    }
+    
+    
 
     // Metodo per eseguire query DDL
     public void executeDDLQuery(String query) {
